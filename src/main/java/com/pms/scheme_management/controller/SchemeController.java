@@ -49,7 +49,7 @@ public class SchemeController {
         return ResponseEntity.noContent().build();
     }
     
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}/status")
     public ResponseEntity<Scheme> updateSchemeActiveStat(@PathVariable int id, @RequestParam boolean isActive){
     try {
         Scheme updatedScheme = schemeService.setSchemeActiveStatus(id, isActive);
