@@ -30,11 +30,21 @@ public class SchemeService {
         return schemeRepository.findById(id).map(scheme -> {
             scheme.setSchemeDetails(schemeDetails.getSchemeDetails());
             scheme.setSchemeName(schemeDetails.getSchemeName());
+            scheme.setDescription(schemeDetails.getDescription());
+            scheme.setEligibiltyCriteria(schemeDetails.getEligibiltyCriteria());
+            scheme.setBenifits(schemeDetails.getBenifits());
             return schemeRepository.save(scheme);
         }).orElseThrow(() -> new RuntimeException("Scheme not found with id: " + id));
     }
 
     public void deleteScheme(int id) {
         schemeRepository.deleteById(id);
+    }
+
+    public Scheme setSchemeActiveStatus(int id, boolean isActive) {
+        return schemeRepository.findById(id).map(scheme -> {
+            scheme.setSchemeIsActive(isActive);
+            return schemeRepository.save(scheme);
+        }).orElseThrow(() -> new RuntimeException("Scheme not found with id: " + id));
     }
 }

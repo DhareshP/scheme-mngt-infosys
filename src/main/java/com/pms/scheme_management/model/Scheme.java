@@ -14,9 +14,17 @@ public class Scheme{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String SchemeName;
+	private String schemeName;
 	
-	private String SchemeDetails;
+	private String description;
+	
+	private String eligibiltyCriteria;
+	
+	private String benifits;
+	
+	private String schemeDetails;
+	
+	private boolean schemeIsActive;
 
 	public int getId() {
 		return id;
@@ -27,24 +35,52 @@ public class Scheme{
 	}
 
 	public String getSchemeName() {
-		return SchemeName;
+		return schemeName;
 	}
 
 	public void setSchemeName(String schemeName) {
-		SchemeName = schemeName;
+		this.schemeName = schemeName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getEligibiltyCriteria() {
+		return eligibiltyCriteria;
+	}
+
+	public void setEligibiltyCriteria(String eligibiltyCriteria) {
+		this.eligibiltyCriteria = eligibiltyCriteria;
+	}
+
+	public String getBenifits() {
+		return benifits;
+	}
+
+	public void setBenifits(String benifits) {
+		this.benifits = benifits;
 	}
 
 	public String getSchemeDetails() {
-		return SchemeDetails;
+		return schemeDetails;
 	}
 
 	public void setSchemeDetails(String schemeDetails) {
-		SchemeDetails = schemeDetails;
+		this.schemeDetails = schemeDetails;
 	}
-	
-	
-	
-	
-	
-	
+
+	public boolean isSchemeIsActive() {
+		return schemeIsActive;
+	}
+
+	public void setSchemeIsActive(boolean schemeIsActive) {
+		this.schemeIsActive = schemeIsActive;
+	} 
+
+		
 }

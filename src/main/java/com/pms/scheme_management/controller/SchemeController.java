@@ -48,4 +48,14 @@ public class SchemeController {
         schemeService.deleteScheme(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Scheme> updateSchemeActiveStat(@PathVariable int id, @RequestParam boolean isActive){
+    try {
+        Scheme updatedScheme = schemeService.setSchemeActiveStatus(id, isActive);
+        return ResponseEntity.ok(updatedScheme);
+    } catch (RuntimeException e) {
+        return ResponseEntity.notFound().build();
+    	}
+	}
 }
