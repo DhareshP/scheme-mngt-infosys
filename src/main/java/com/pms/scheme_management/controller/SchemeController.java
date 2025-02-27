@@ -43,19 +43,13 @@ public class SchemeController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteScheme(@PathVariable int id) {
-        schemeService.deleteScheme(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Scheme> updateSchemeActiveStat(@PathVariable int id, @RequestParam boolean isActive) {
+        try {
+            Scheme updatedScheme = schemeService.setSchemeActiveStatus(id, isActive);
+            return ResponseEntity.ok(updatedScheme);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
-    
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<Scheme> updateSchemeActiveStat(@PathVariable int id, @RequestParam boolean isActive){
-    try {
-        Scheme updatedScheme = schemeService.setSchemeActiveStatus(id, isActive);
-        return ResponseEntity.ok(updatedScheme);
-    } catch (RuntimeException e) {
-        return ResponseEntity.notFound().build();
-    	}
-	}
 }

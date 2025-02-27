@@ -18,9 +18,9 @@ public class Scheme{
 	
 	private String description;
 	
-	private String eligibiltyCriteria;
+	private String eligibilityCriteria;
 	
-	private String benifits;
+	private String benefits;
 	
 	private String schemeDetails;
 	
@@ -51,19 +51,19 @@ public class Scheme{
 	}
 
 	public String getEligibiltyCriteria() {
-		return eligibiltyCriteria;
+		return eligibilityCriteria;
 	}
 
 	public void setEligibiltyCriteria(String eligibiltyCriteria) {
-		this.eligibiltyCriteria = eligibiltyCriteria;
+		this.eligibilityCriteria = eligibiltyCriteria;
 	}
 
 	public String getBenifits() {
-		return benifits;
+		return benefits;
 	}
 
 	public void setBenifits(String benifits) {
-		this.benifits = benifits;
+		this.benefits = benifits;
 	}
 
 	public String getSchemeDetails() {
