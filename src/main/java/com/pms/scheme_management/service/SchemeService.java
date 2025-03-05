@@ -47,4 +47,8 @@ public class SchemeService {
             return schemeRepository.save(scheme);
         }).orElseThrow(() -> new RuntimeException("Scheme not found with id: " + id));
     }
+
+    public List<Scheme> getAllActiveSchemes(){
+        return schemeRepository.findBySchemeIsActiveIsTrue();
+    }
 }

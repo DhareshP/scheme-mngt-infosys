@@ -1,6 +1,7 @@
 package com.pms.scheme_management.controller;
 
 import com.pms.scheme_management.model.Scheme;
+import com.pms.scheme_management.repository.SchemeRepository;
 import com.pms.scheme_management.service.SchemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ public class SchemeController {
 
     @Autowired
     private SchemeService schemeService;
+    @Autowired
+    private SchemeRepository schemeRepository;
 
     @GetMapping
     public List<Scheme> getAllSchemes() {
@@ -51,5 +54,10 @@ public class SchemeController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/active")
+    public List<Scheme> getActiveSchemes(){
+        return schemeService.getAllActiveSchemes();
     }
 }
