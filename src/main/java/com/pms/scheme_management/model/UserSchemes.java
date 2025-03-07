@@ -1,9 +1,6 @@
 package com.pms.scheme_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class UserSchemes {
@@ -12,12 +9,14 @@ public class UserSchemes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int schemeId;
+    @ManyToOne
+    @JoinColumn(name = "scheme_id", nullable = false)
+    private Scheme scheme;
 
     private int userId;
 
-    public UserSchemes(int schemeId, int userId) {
-        this.schemeId = schemeId;
+    public UserSchemes(Scheme scheme, int userId) {
+        this.scheme = scheme;
         this.userId = userId;
     }
 
@@ -32,12 +31,12 @@ public class UserSchemes {
         this.id = id;
     }
 
-    public int getSchemeId() {
-        return schemeId;
+    public Scheme getScheme() {
+        return scheme;
     }
 
-    public void setSchemeId(int schemeId) {
-        this.schemeId = schemeId;
+    public void setScheme(Scheme scheme) {
+        this.scheme = scheme;
     }
 
     public int getUserId() {

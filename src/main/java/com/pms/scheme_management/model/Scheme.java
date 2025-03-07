@@ -5,7 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "schemes")
@@ -15,14 +16,20 @@ public class Scheme{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@NotBlank(message = "Scheme name is mandatory")
+	@Size(max = 100, message = "Scheme name cannot exceed 100 characters")
 	private String schemeName;
 
+	@Size(max = 500, message = "Description cannot exceed 500 characters")
 	private String description;
-	
+
+	@NotBlank(message = "Eligibility criteria is required")
 	private String eligibilityCriteria;
-	
+
+	@NotBlank(message = "Benefits are required")
 	private String benefits;
-	
+
+	@Size(max = 1000, message = "Scheme details cannot exceed 1000 characters")
 	private String schemeDetails;
 	
 	private boolean schemeIsActive;

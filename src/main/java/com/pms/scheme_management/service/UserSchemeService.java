@@ -25,7 +25,7 @@ public class UserSchemeService {
             throw new RuntimeException("Scheme not active for application");
         }
 
-        UserSchemes us = new UserSchemes(schemeId, userId);
+        UserSchemes us = new UserSchemes(scheme, userId);
         return userSchemesRepository.save(us);
     }
 

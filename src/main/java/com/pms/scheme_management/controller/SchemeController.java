@@ -3,6 +3,7 @@ package com.pms.scheme_management.controller;
 import com.pms.scheme_management.model.Scheme;
 import com.pms.scheme_management.repository.SchemeRepository;
 import com.pms.scheme_management.service.SchemeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class SchemeController {
     }
 
     @PostMapping
-    public Scheme createScheme(@RequestBody Scheme scheme) {
+    public Scheme createScheme(@Valid @RequestBody Scheme scheme) {
         return schemeService.createScheme(scheme);
     }
 

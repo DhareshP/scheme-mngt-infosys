@@ -1,5 +1,6 @@
 package com.pms.scheme_management.service;
 
+import com.pms.scheme_management.exception.SchemeNotFoundException;
 import com.pms.scheme_management.model.Scheme;
 import com.pms.scheme_management.repository.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class SchemeService {
             scheme.setEligibiltyCriteria(schemeDetails.getEligibiltyCriteria());
             scheme.setBenifits(schemeDetails.getBenifits());
             return schemeRepository.save(scheme);
-        }).orElseThrow(() -> new RuntimeException("Scheme not found with id: " + id));
+        }).orElseThrow(() -> new SchemeNotFoundException("Scheme not found with id: " + id));
     }
 
     public void deleteScheme(int id) {
@@ -45,7 +46,7 @@ public class SchemeService {
         return schemeRepository.findById(id).map(scheme -> {
             scheme.setSchemeIsActive(isActive);
             return schemeRepository.save(scheme);
-        }).orElseThrow(() -> new RuntimeException("Scheme not found with id: " + id));
+        }).orElseThrow(() -> new SchemeNotFoundException("Scheme not found with id: " + id));
     }
 
     public List<Scheme> getAllActiveSchemes(){
