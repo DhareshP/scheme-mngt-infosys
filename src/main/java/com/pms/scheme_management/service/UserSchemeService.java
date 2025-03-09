@@ -32,7 +32,7 @@ public class UserSchemeService {
         UserSchemes us = new UserSchemes(scheme, userId);
         UserSchemes savedUs = userSchemesRepository.save(us);
 
-        String email = "@gmail.com"; // Fetch user email from pms db
+        String email = "dhareshcoc@gmail.com";
         String subject = "Scheme Application Confirmation";
         String body = "Dear User,<br><br>You have successfully applied for the scheme: <b>"
                 + scheme.getSchemeName() + "</b>.<br>Thank you!<br><br>Regards,<br>Scheme Management Team";
@@ -43,5 +43,9 @@ public class UserSchemeService {
 
     public List<UserSchemes> allAppliedSchemesOfUser(int userId){
         return userSchemesRepository.findByUserId(userId);
+    }
+
+    public List<Scheme> allActiveSchemes(){
+        return userSchemesRepository.findActiveSchemes();
     }
 }
