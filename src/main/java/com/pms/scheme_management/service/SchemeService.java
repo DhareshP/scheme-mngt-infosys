@@ -5,6 +5,8 @@ import com.pms.scheme_management.model.Scheme;
 import com.pms.scheme_management.repository.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,8 @@ public class SchemeService {
     @Autowired
     private SchemeRepository schemeRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(SchemeService.class);
+
     public List<Scheme> getAllSchemes() {
         return schemeRepository.findAll();
     }
@@ -24,17 +28,24 @@ public class SchemeService {
     }
 
     public Scheme createScheme(Scheme scheme) {
-        return schemeRepository.save(scheme);
+         log.info("Received payload for scheme creation: {}", scheme);
+        Scheme savedScheme = schemeRepository.save(scheme);
+        log.info("Saved scheme: {}", savedScheme);
+        return savedScheme;
     }
 
     public Scheme updateScheme(int id, Scheme schemeDetails) {
         return schemeRepository.findById(id).map(scheme -> {
+            log.info("Received payload for scheme update: {}", id , schemeDetails);
             scheme.setSchemeDetails(schemeDetails.getSchemeDetails());
             scheme.setSchemeName(schemeDetails.getSchemeName());
             scheme.setDescription(schemeDetails.getDescription());
-            scheme.setEligibiltyCriteria(schemeDetails.getEligibiltyCriteria());
-            scheme.setBenifits(schemeDetails.getBenifits());
-            return schemeRepository.save(scheme);
+            scheme.setEligibilityCriteria(schemeDetails.getEligibilityCriteria());
+            scheme.setBenefits(schemeDetails.getBenefits());
+//            return schemeRepository.save(scheme);
+            Scheme updatedScheme =  schemeRepository.save(scheme);
+            log.info("Received payload for scheme creation: {}", updatedScheme);
+            return updatedScheme;
         }).orElseThrow(() -> new SchemeNotFoundException("Scheme not found with id: " + id));
     }
 

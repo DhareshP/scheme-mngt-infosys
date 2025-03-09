@@ -58,20 +58,22 @@ public class Scheme{
 		this.description = description;
 	}
 
-	public String getEligibiltyCriteria() {
+
+
+	public @NotBlank(message = "Eligibility criteria is required") String getEligibilityCriteria() {
 		return eligibilityCriteria;
 	}
 
-	public void setEligibiltyCriteria(String eligibiltyCriteria) {
-		this.eligibilityCriteria = eligibiltyCriteria;
+	public void setEligibilityCriteria(@NotBlank(message = "Eligibility criteria is required") String eligibilityCriteria) {
+		this.eligibilityCriteria = eligibilityCriteria;
 	}
 
-	public String getBenifits() {
+	public @NotBlank(message = "Benefits are required") String getBenefits() {
 		return benefits;
 	}
 
-	public void setBenifits(String benifits) {
-		this.benefits = benifits;
+	public void setBenefits(@NotBlank(message = "Benefits are required") String benefits) {
+		this.benefits = benefits;
 	}
 
 	public String getSchemeDetails() {
@@ -88,7 +90,20 @@ public class Scheme{
 
 	public void setSchemeIsActive(boolean schemeIsActive) {
 		this.schemeIsActive = schemeIsActive;
-	} 
+	}
 
-		
+	@Override
+	public String toString() {
+		return "Scheme{" +
+				"id=" + id +
+				", schemeName='" + schemeName + '\'' +
+				", description='" + description + '\'' +
+				", eligibiltyCriteria='" + eligibilityCriteria + '\'' +
+				", benifits='" + benefits + '\'' +
+				", schemeIsActive=" + schemeIsActive +
+				'}';
+	}
+
+
+
 }
