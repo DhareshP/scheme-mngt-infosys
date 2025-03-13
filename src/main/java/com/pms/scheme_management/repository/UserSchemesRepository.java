@@ -13,8 +13,10 @@ public interface UserSchemesRepository extends JpaRepository<UserSchemes , Long>
 
     List<UserSchemes> findByUserId(int userId);
 
-//    List<Scheme> findBySchemeIsActiveTrue();
         @Query("SELECT s FROM Scheme s WHERE s.schemeIsActive = true")
         List<Scheme> findActiveSchemes();
+
+        @Query("SELECT us FROM UserSchemes us JOIN FETCH us.userId JOIN FETCH us.scheme")
+        List<UserSchemes>findAllByUserSchemes();
 
 }

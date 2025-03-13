@@ -13,6 +13,8 @@ public class UserSchemes {
     @JoinColumn(name = "scheme_id", nullable = false)
     private Scheme scheme;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
     private int userId;
 
     public UserSchemes(Scheme scheme, int userId) {

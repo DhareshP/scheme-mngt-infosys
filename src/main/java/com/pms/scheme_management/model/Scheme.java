@@ -6,18 +6,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "schemes")
 public class Scheme{
-	
+	//validation not working
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	//add policy and feedback reltion
 	@NotBlank(message = "Scheme name is mandatory")
-	@Size(max = 100, message = "Scheme name cannot exceed 100 characters")
+	@Size(max = 5, message = "Scheme name cannot exceed 5 characters")
 	private String schemeName;
 
 	@Size(max = 500, message = "Description cannot exceed 500 characters")
@@ -60,19 +61,19 @@ public class Scheme{
 
 
 
-	public @NotBlank(message = "Eligibility criteria is required") String getEligibilityCriteria() {
+	public String getEligibilityCriteria() {
 		return eligibilityCriteria;
 	}
 
-	public void setEligibilityCriteria(@NotBlank(message = "Eligibility criteria is required") String eligibilityCriteria) {
+	public void setEligibilityCriteria (String eligibilityCriteria) {
 		this.eligibilityCriteria = eligibilityCriteria;
 	}
 
-	public @NotBlank(message = "Benefits are required") String getBenefits() {
+	public String getBenefits() {
 		return benefits;
 	}
 
-	public void setBenefits(@NotBlank(message = "Benefits are required") String benefits) {
+	public void setBenefits (String benefits) {
 		this.benefits = benefits;
 	}
 

@@ -2,6 +2,7 @@ package com.pms.scheme_management.service;
 
 import com.pms.scheme_management.exception.SchemeNotFoundException;
 import com.pms.scheme_management.model.Scheme;
+import com.pms.scheme_management.model.UserSchemes;
 import com.pms.scheme_management.repository.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class SchemeService {
     @Autowired
     private SchemeRepository schemeRepository;
 
+    @Autowired
+    private UserSchemeService userSchemeService;
+
     private static final Logger log = LoggerFactory.getLogger(SchemeService.class);
 
     public List<Scheme> getAllSchemes() {
@@ -24,8 +28,10 @@ public class SchemeService {
     }
 
     public Optional<Scheme> getSchemeById(int id) {
-        return schemeRepository.findById(id);
+        return Optional.ofNullable(schemeRepository.findById(id)
+                .orElseThrow(() -> new SchemeNotFoundException("Scheme not found with ID: " + id)));
     }
+
 
     public Scheme createScheme(Scheme scheme) {
          log.info("Received payload for scheme creation: {}", scheme);
@@ -42,7 +48,6 @@ public class SchemeService {
             scheme.setDescription(schemeDetails.getDescription());
             scheme.setEligibilityCriteria(schemeDetails.getEligibilityCriteria());
             scheme.setBenefits(schemeDetails.getBenefits());
-//            return schemeRepository.save(scheme);
             Scheme updatedScheme =  schemeRepository.save(scheme);
             log.info("Received payload for scheme creation: {}", updatedScheme);
             return updatedScheme;

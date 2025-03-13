@@ -4,6 +4,7 @@ import com.pms.scheme_management.model.Scheme;
 import com.pms.scheme_management.model.UserSchemes;
 import com.pms.scheme_management.service.UserSchemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,4 +30,9 @@ public class UserSchemesController {
     public List<Scheme> allActiveSchemes(){
         return userSchemeService.allActiveSchemes();
     }
+    @GetMapping
+    public ResponseEntity<List<UserSchemes>> getUserAndSchemes() {
+        return ResponseEntity.ok(userSchemeService.getUsersAndSchemes());
+    }
+
 }

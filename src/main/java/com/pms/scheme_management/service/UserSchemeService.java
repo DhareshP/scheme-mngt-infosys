@@ -48,4 +48,8 @@ public class UserSchemeService {
     public List<Scheme> allActiveSchemes(){
         return userSchemesRepository.findActiveSchemes();
     }
+
+    public List<UserSchemes> getUsersAndSchemes() {
+        return userSchemesRepository.findAllByUserSchemes();
+    }
 }
