@@ -21,6 +21,8 @@ public class Scheme{
 	@Size(max = 5, message = "Scheme name cannot exceed 5 characters")
 	private String schemeName;
 
+	private String policy;
+
 	@Size(max = 500, message = "Description cannot exceed 500 characters")
 	private String description;
 
