@@ -28,7 +28,7 @@ public class PolicyService {
 
     public Policy updatePolicy(int id, Policy updatedPolicy) {
         if (policyRepository.existsById(id)) {
-            updatedPolicy.setId(id);
+            updatedPolicy.setPolicyId(id);
             return policyRepository.save(updatedPolicy);
         }
         return null;

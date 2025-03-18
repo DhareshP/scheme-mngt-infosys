@@ -10,7 +10,7 @@ public class Policy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int policyId;
 
     @Column(name = "policy_name", nullable = false)
     private String policyName;
@@ -31,12 +31,25 @@ public class Policy {
     @Column(nullable = false)
     private String annuity;
 
-	public int getId() {
-		return id;
+	@ManyToOne
+	@JoinColumn(name = "scheme_id", nullable = false)
+	private Scheme scheme;
+
+
+	public Scheme getScheme() {
+		return scheme;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setScheme(Scheme scheme) {
+		this.scheme = scheme;
+	}
+
+	public int getPolicyId() {
+		return policyId;
+	}
+
+	public void setPolicyId(int id) {
+		this.policyId = id;
 	}
 
 	public String getPolicyName() {
@@ -89,7 +102,7 @@ public class Policy {
 
 	@Override
 	public String toString() {
-		return "Policy [id=" + id + ", policyName=" + policyName + ", startDate=" + startDate + ", amount=" + amount
+		return "Policy [id=" + policyId + ", policyName=" + policyName + ", startDate=" + startDate + ", amount=" + amount
 				+ ", years=" + years + ", status=" + status + ", annuity=" + annuity + "]";
 	}
     

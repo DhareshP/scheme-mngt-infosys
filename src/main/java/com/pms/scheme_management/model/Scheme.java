@@ -1,27 +1,21 @@
 package com.pms.scheme_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "schemes")
 public class Scheme{
-	//validation not working
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	//add policy and feedback reltion
+	private int schemeId;
+
 	@NotBlank(message = "Scheme name is mandatory")
 	@Size(max = 5, message = "Scheme name cannot exceed 5 characters")
 	private String schemeName;
-
-	private String policy;
 
 	@Size(max = 500, message = "Description cannot exceed 500 characters")
 	private String description;
@@ -34,15 +28,21 @@ public class Scheme{
 
 	@Size(max = 1000, message = "Scheme details cannot exceed 1000 characters")
 	private String schemeDetails;
-	
+
 	private boolean schemeIsActive;
 
-	public int getId() {
-		return id;
+	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Policy> policies;
+
+	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Feedback> feedbacks;
+
+	public int getSchemeId() {
+		return schemeId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setSchemeId(int id) {
+		this.schemeId = id;
 	}
 
 	public String getSchemeName() {
@@ -98,7 +98,7 @@ public class Scheme{
 	@Override
 	public String toString() {
 		return "Scheme{" +
-				"id=" + id +
+				"id=" + schemeId +
 				", schemeName='" + schemeName + '\'' +
 				", description='" + description + '\'' +
 				", eligibiltyCriteria='" + eligibilityCriteria + '\'' +
@@ -106,7 +106,4 @@ public class Scheme{
 				", schemeIsActive=" + schemeIsActive +
 				'}';
 	}
-
-
-
 }
