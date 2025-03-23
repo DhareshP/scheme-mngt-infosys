@@ -32,6 +32,10 @@ public class SchemeService {
                 .orElseThrow(() -> new SchemeNotFoundException("Scheme not found with ID: " + id)));
     }
 
+    public List<Scheme> getBySchemeName(String schemeName) {
+        return schemeRepository.findSchemeBySchemeName(schemeName);
+    }
+
 
     public Scheme createScheme(Scheme scheme) {
          log.info("Received payload for scheme creation: {}", scheme);

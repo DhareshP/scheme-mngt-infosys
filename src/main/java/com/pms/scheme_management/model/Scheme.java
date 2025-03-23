@@ -1,10 +1,6 @@
 package com.pms.scheme_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -16,14 +12,13 @@ public class Scheme{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	//add policy and feedback reltion
+
 	@NotBlank(message = "Scheme name is mandatory")
-	@Size(max = 5, message = "Scheme name cannot exceed 5 characters")
+	@Size(max = 10, message = "Scheme name cannot exceed 5 characters")
 	private String schemeName;
 
-	private String policy;
-
 	@Size(max = 500, message = "Description cannot exceed 500 characters")
+	@NotBlank(message = "Scheme description is mandatory")
 	private String description;
 
 	@NotBlank(message = "Eligibility criteria is required")
@@ -32,9 +27,16 @@ public class Scheme{
 	@NotBlank(message = "Benefits are required")
 	private String benefits;
 
-	@Size(max = 1000, message = "Scheme details cannot exceed 1000 characters")
+	@Size(max = 100, message = "Scheme details cannot exceed 1000 characters")
+	@NotBlank(message = "Scheme details is mandatory")
 	private String schemeDetails;
-	
+
+//	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Policy> policies;
+//
+//	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Feedback> feedbacks;
+//
 	private boolean schemeIsActive;
 
 	public int getId() {

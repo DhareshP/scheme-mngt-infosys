@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface SchemeRepository extends JpaRepository<Scheme, Integer> {
 
     List<Scheme> findBySchemeIsActiveIsTrue();
+
+    List<Scheme> findSchemeBySchemeName(String schemeName);
 }

@@ -32,6 +32,17 @@ public class SchemeController {
         return ResponseEntity.ok(scheme);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Scheme>> searchSchemesByName(@RequestParam String schemeName) {
+        List<Scheme> schemes = schemeService.getBySchemeName(schemeName);
+        if (schemes.isEmpty()) {
+            throw new SchemeNotFoundException("No schemes found with name containing: " + schemeName);
+        }
+        return ResponseEntity.ok(schemes);
+    }
+
+
+
 
     @PostMapping
     public Scheme createScheme(@Valid @RequestBody Scheme scheme) {
