@@ -10,7 +10,7 @@ public class UserSchemes {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "scheme_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private Scheme scheme;
 
 //    @ManyToOne
