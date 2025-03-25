@@ -70,6 +70,6 @@ public class SchemeService {
     }
 
     public  List<Scheme> getAllSchemesBySchemeName(String schemeName) {
-        return schemeRepository.findSchemeBySchemeName(schemeName);
+        return schemeRepository.findSchemeBySchemeNameAndSchemeIsActiveIsTrue(schemeName);
     }
 }
