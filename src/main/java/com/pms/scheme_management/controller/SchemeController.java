@@ -54,5 +54,16 @@ public class SchemeController {
     public List<Scheme> getActiveSchemes(){
         return schemeService.getAllActiveSchemes();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Scheme>> searchSchemeByName(@RequestParam String schemeName) {
+        List<Scheme> filteredSchemes = schemeService.getAllSchemesBySchemeName(schemeName);
+
+        if (filteredSchemes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 No Content if no schemes found
+        }
+
+        return ResponseEntity.ok(filteredSchemes);
+    }
 }
 
