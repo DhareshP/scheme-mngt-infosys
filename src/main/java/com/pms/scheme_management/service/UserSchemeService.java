@@ -19,9 +19,6 @@ public class UserSchemeService {
     @Autowired
     UserSchemesRepository userSchemesRepository;
 
-    @Autowired
-    EmailService emailService;
-
     public UserSchemes applyToScheme(int schemeId, int userId){
         Scheme scheme = schemeRepository.findById(schemeId).orElseThrow(() -> new SchemeNotFoundException("Scheme not found with id: "+ schemeId));
 
@@ -32,12 +29,12 @@ public class UserSchemeService {
         UserSchemes us = new UserSchemes(scheme, userId);
         UserSchemes savedUs = userSchemesRepository.save(us);
 
-        String email = "dhareshcoc@gmail.com";
-        String subject = "Scheme Application Confirmation";
-        String body = "Dear User,<br><br>You have successfully applied for the scheme: <b>"
-                + scheme.getSchemeName() + "</b>.<br>Thank you!<br><br>Regards,<br>Scheme Management Team";
-
-        emailService.sendEmail(email , subject , body);
+//        String email = "dhareshcoc@gmail.com";
+//        String subject = "Scheme Application Confirmation";
+//        String body = "Dear User,<br><br>You have successfully applied for the scheme: <b>"
+//                + scheme.getSchemeName() + "</b>.<br>Thank you!<br><br>Regards,<br>Scheme Management Team";
+//
+//        emailService.sendEmail(email , subject , body);
         return savedUs;
     }
 

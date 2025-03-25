@@ -4,20 +4,19 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.List;
-
 @Entity
 @Table(name = "schemes")
 public class Scheme{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int schemeId;
+	private int id;
 
 	@NotBlank(message = "Scheme name is mandatory")
-	@Size(max = 5, message = "Scheme name cannot exceed 5 characters")
+	@Size(max = 20, message = "Scheme name cannot exceed 20 characters")
 	private String schemeName;
 
 	@Size(max = 500, message = "Description cannot exceed 500 characters")
+	@NotBlank(message = "Eligibility criteria is required")
 	private String description;
 
 	@NotBlank(message = "Eligibility criteria is required")
@@ -27,22 +26,23 @@ public class Scheme{
 	private String benefits;
 
 	@Size(max = 1000, message = "Scheme details cannot exceed 1000 characters")
+	@NotBlank(message = "Eligibility criteria is required")
 	private String schemeDetails;
 
 	private boolean schemeIsActive;
 
-	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Policy> policies;
+//	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Policy> policies;
+//
+//	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Feedback> feedbacks;
 
-	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Feedback> feedbacks;
-
-	public int getSchemeId() {
-		return schemeId;
+	public int getId() {
+		return id;
 	}
 
-	public void setSchemeId(int id) {
-		this.schemeId = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getSchemeName() {
@@ -98,7 +98,7 @@ public class Scheme{
 	@Override
 	public String toString() {
 		return "Scheme{" +
-				"id=" + schemeId +
+				"id=" + id +
 				", schemeName='" + schemeName + '\'' +
 				", description='" + description + '\'' +
 				", eligibiltyCriteria='" + eligibilityCriteria + '\'' +
