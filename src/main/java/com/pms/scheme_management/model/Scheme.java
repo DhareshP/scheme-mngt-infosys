@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "schemes")
 public class Scheme{
@@ -31,9 +33,9 @@ public class Scheme{
 
 	private boolean schemeIsActive;
 
-//	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<Policy> policies;
-//
+	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Policy> policies;
+
 //	@OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Feedback> feedbacks;
 

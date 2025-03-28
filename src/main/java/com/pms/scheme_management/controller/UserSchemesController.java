@@ -16,15 +16,15 @@ public class UserSchemesController {
     @Autowired
     UserSchemeService userSchemeService;
 
-    @PostMapping("/apply")
-    public UserSchemes applyToSchemes(@RequestParam int id, @RequestParam int userId){
-        return userSchemeService.applyToScheme(id, userId);
-    }
-
-    @GetMapping("/user/{userId}")
-    public List<UserSchemes> allAppledSchemesOfUser(@PathVariable int userId){
-        return userSchemeService.allAppliedSchemesOfUser(userId);
-    }
+//    @PostMapping("/apply")
+//    public UserSchemes applyToSchemes(@RequestParam int id, @RequestParam int userId){
+//        return userSchemeService.applyToScheme(id, userId);
+//    }
+//
+//    @GetMapping("/user/{userId}")
+//    public List<UserSchemes> allAppledSchemesOfUser(@PathVariable int userId){
+//        return userSchemeService.allAppliedSchemesOfUser(userId);
+//    }
 
     @GetMapping("/active-schemes")
     public List<Scheme> allActiveSchemes(){

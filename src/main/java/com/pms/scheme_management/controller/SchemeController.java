@@ -1,7 +1,9 @@
 package com.pms.scheme_management.controller;
 
 import com.pms.scheme_management.exception.SchemeNotFoundException;
+import com.pms.scheme_management.model.Policy;
 import com.pms.scheme_management.model.Scheme;
+import com.pms.scheme_management.repository.PolicyRepo;
 import com.pms.scheme_management.repository.SchemeRepository;
 import com.pms.scheme_management.service.SchemeService;
 import jakarta.validation.Valid;
@@ -17,8 +19,12 @@ public class SchemeController {
 
     @Autowired
     private SchemeService schemeService;
+
     @Autowired
     private SchemeRepository schemeRepository;
+
+    @Autowired
+    private PolicyRepo policyRepository;
 
     @GetMapping
     public List<Scheme> getAllSchemes() {
@@ -31,6 +37,33 @@ public class SchemeController {
                 .orElseThrow(() -> new SchemeNotFoundException("Scheme not found with ID: " + id));
         return ResponseEntity.ok(scheme);
     }
+
+    @PostMapping("/{schemeId}/policies")
+    public ResponseEntity<String> addPolicyToScheme(@PathVariable int schemeId, @RequestBody Policy policy) {
+        return schemeRepository.findById(schemeId).map(scheme -> {
+            policy.setScheme(scheme);
+            policyRepository.save(policy);
+            return ResponseEntity.ok("Policy added successfully to Scheme ID: " + schemeId);
+        }).orElse(ResponseEntity.badRequest().body("Scheme not found with ID: " + schemeId));
+    }
+
+    @GetMapping("/{schemeId}/policies")
+    public ResponseEntity<?> getPoliciesBySchemeId(@PathVariable int schemeId) {
+        return schemeRepository.findById(schemeId).map(scheme -> {
+            List<Policy> policies = policyRepository.findBySchemeId(schemeId);
+            if (policies.isEmpty()) {
+                return ResponseEntity.ok("No policies found under Scheme ID: " + schemeId);
+            }
+            return ResponseEntity.ok(policies);
+        }).orElse(ResponseEntity.badRequest().body("Scheme not found with ID: " + schemeId));
+    }
+
+//    @GetMapping("/schemes/{schemeId}/policies")
+//    public ResponseEntity<List<Policy>> getPoliciesBySchemeId(@PathVariable int schemeId) {
+//        List<Policy> policies = policyRepository.findBySchemeId(schemeId);
+//        return ResponseEntity.ok(policies);
+//    }
+
 
 
     @PostMapping

@@ -69,7 +69,17 @@ public class SchemeService {
         return schemeRepository.findBySchemeIsActiveIsTrue();
     }
 
-    public  List<Scheme> getAllSchemesBySchemeName(String schemeName) {
-        return schemeRepository.findSchemeBySchemeNameAndSchemeIsActiveIsTrue(schemeName);
+//    public  List<Scheme> getAllSchemesBySchemeName(String schemeName) {
+//        return schemeRepository.findSchemeBySchemeNameAndSchemeIsActiveIsTrue(schemeName);
+//    }
+
+    public List<Scheme> getAllSchemesBySchemeName(String schemeName) {
+        if (schemeName == null || schemeName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Scheme name cannot be null or empty.");
+        }
+
+        // Perform a case-insensitive search
+        return schemeRepository.searchBySchemeNameFlexible(schemeName);
     }
+
 }
