@@ -65,6 +65,8 @@ GET     /api/user-schemes                             // Admin view: All user-sc
 
 ## 🧠 Backend Highlights
 
+- **Email Notification**: Integrated `JavaMailSender` to send email alerts to users when a scheme is successfully bought. This ensures real-time acknowledgment and enhances user engagement.
+
 - **Custom JPA Queries**: Used for optimized search and filtering.
 - **Service Layer Architecture**: Ensures business logic is cleanly separated from controllers.
 - **Validation & Exception Handling**: Built-in input validation using `@Valid` and custom exceptions (`InvalidEntityException`).
@@ -116,9 +118,3 @@ GET     /api/user-schemes                             // Admin view: All user-sc
 
 ---
 
-## 🤝 Contributors
-
-- Internship Team @ **Infosys**
-- Role: Backend Developer (Scheme Module)
-
----
